@@ -35,8 +35,6 @@ public interface GenericDaoCR<T> {
 	
 	List<T> findAll();
 	
-	T findById(long id);
-	
 	List<T> filtered(String filter, Object[] argsFilter, long limit);
 
 	long create(T entity);

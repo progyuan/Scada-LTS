@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.scada_lts.dao.GenericDaoCR;
 import org.scada_lts.dao.model.point.PointValue;
+import org.scada_lts.dao.model.point.PointValueAdnnotation;
 import org.scada_lts.dao.pointvalues.PointValueAdnnotationsDAO;
 import org.scada_lts.dao.pointvalues.PointValueDAO;
 import org.scada_lts.mango.adapter.MangoPointValues;
@@ -180,6 +181,7 @@ public class PointValueService implements MangoPointValues {
 			return null;
 		}
 	}
+
 	
 	// The same From TO simple get From To and run on every record;
 	/*public void getPointValuesBetween(int dataPointId, long from, long to,

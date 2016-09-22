@@ -107,14 +107,12 @@ public class PointValueAdnnotationsDAO implements GenericDaoCR<PointValueAdnnota
 		return (List<PointValueAdnnotation>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_ADNNOTATIONS_SELECT, new Object[]{ }, new PointValueAdnnotationRowMapper());
 	}
 
-
+	
 	/*
 	 * @arguments id - idPointValue
-	 * @see org.scada_lts.dao.GenericDaoCR#findById(long)
 	 */
-	@Override
-	public PointValueAdnnotation findById(long id) {
-		return (PointValueAdnnotation) DAO.getInstance().getJdbcTemp().queryForObject(POINT_VALUE_ADNNOTATIONS_SELECT +" where "+POINT_VALUE_ADNNOTATIONS_FILTER_BASE_ON_POINT_VALUES_ID, new Object[]  { id }, new PointValueAdnnotationRowMapper());
+	public List<PointValueAdnnotation> findByPointValueId(long id) {
+		return (List<PointValueAdnnotation>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_ADNNOTATIONS_SELECT +" where "+POINT_VALUE_ADNNOTATIONS_FILTER_BASE_ON_POINT_VALUES_ID, new Object[]  { id }, new PointValueAdnnotationRowMapper());
 	}
 
 	@Override
@@ -124,6 +122,10 @@ public class PointValueAdnnotationsDAO implements GenericDaoCR<PointValueAdnnota
 			myLimit = LIMIT+limit;
 		}
 		return (List<PointValueAdnnotation>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_ADNNOTATIONS_SELECT+" where "+ filter + myLimit, argsFilter, new PointValueAdnnotationRowMapper());
+	}
+	
+	public List<PointValueAdnnotation> filtered(String filter, Object[] argsFilter) {
+		return (List<PointValueAdnnotation>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_ADNNOTATIONS_SELECT+" where "+ filter, argsFilter, new PointValueAdnnotationRowMapper());
 	}
 
 	@Transactional(readOnly = false,propagation= Propagation.REQUIRES_NEW,isolation= Isolation.READ_COMMITTED,rollbackFor=SQLException.class)

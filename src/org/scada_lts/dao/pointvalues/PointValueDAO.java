@@ -190,6 +190,12 @@ public class PointValueDAO implements GenericDaoCR<PointValue> {
 			+ "pv."+COLUMN_NAME_TIME_STAMP+"=? "
 			+ "order by pv."+COLUMN_NAME_TIME_STAMP;
 	
+	public static final String POINT_VALUE_FILTER_BASE_ON_TIME_STAMP = " "
+			+ "pv."+COLUMN_NAME_TIME_STAMP+"<? "
+			+ "pv."+COLUMN_NAME_TIME_STAMP+">=? "
+			+ "order by pv."+COLUMN_NAME_TIME_STAMP;
+	
+	
 	
 	// @formatter:on
 	
@@ -271,7 +277,6 @@ public class PointValueDAO implements GenericDaoCR<PointValue> {
 		return (List<PointValue>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_SELECT, new Object[]{ }, new PointValueRowMapper());
 	}
 
-	@Override
 	public PointValue findById(long id) {
 		return (PointValue) DAO.getInstance().getJdbcTemp().queryForObject(POINT_VALUE_SELECT_ON_BASE_ID, new Object[]  { id }, new PointValueRowMapper());
 	}
@@ -288,6 +293,10 @@ public class PointValueDAO implements GenericDaoCR<PointValue> {
 			myLimit = LIMIT+limit;
 		}
 		return (List<PointValue>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_SELECT+" where "+ filter + myLimit, argsFilter, new PointValueRowMapper());
+	}
+	
+	public List<PointValue> filtered(String filter, Object[] argsFilter) {
+		return (List<PointValue>) DAO.getInstance().getJdbcTemp().query(POINT_VALUE_SELECT+" where "+ filter , argsFilter, new PointValueRowMapper());
 	}
 
 	@Transactional(readOnly = false,propagation= Propagation.REQUIRES_NEW,isolation= Isolation.READ_COMMITTED,rollbackFor=SQLException.class)

@@ -78,6 +78,17 @@ public class ScadaConfig {
 	 */
 	public static final String CRONE_UPDATE_CACHE_POINT_HIERARCHY = "abilit.CRONE_UPDATE_CACHE_POINT_HIERARCHY";
 	
+	/**
+	 * Time how long data point value take in buffer for example seven days 604800000 (1000*3600*24*7)
+	 */
+	public static final String TIME_BUFFER_POINT_VALUES = "abilit.TIME_BUFFER_POINT_VALUE";
+	
+	/**
+	 * DEFAULT_BUFFER_POINT_VALUES seven days:  604800000 (1000*3600*24*7)
+	 */
+	public static final Long DEFAULT_BUFFER_POINT_VALUES = 604800000L;
+	
+	
 	private static final Log LOG = LogFactory.getLog(ScadaConfig.class);
 	private static final String FILE_NAME_LOGO="logo.png";
 	private static final String FILE_NAME_PROPERTIES="env.properties";
@@ -137,7 +148,7 @@ public class ScadaConfig {
 	 * @param defaultValues
 	 * @return
 	 */
-	public Long getLong(String propertyName, int defaultValues) {
+	public Long getLong(String propertyName, long defaultValues) {
 		Long result = new Long(defaultValues);
 		try {
 			String propertyValue = getProperty(propertyName);

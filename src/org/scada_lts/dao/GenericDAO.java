@@ -26,6 +26,8 @@ package org.scada_lts.dao;
  */
 public interface GenericDAO<T> extends GenericDaoCR<T> {
 	
+	T findByPointValueId(long id);
+	
 	void update(T entity);
 
 	void delete(T entity);
